@@ -40,9 +40,9 @@ if(NOT CMAKE_BUILD_TYPE)
       FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
-SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
-SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 option(BAYESOPT_BUILD_EXAMPLES "Build examples and demos?" ON)
 option(BAYESOPT_BUILD_TESTS "Build tests?" OFF)
@@ -81,54 +81,56 @@ ELSE(BAYESOPT_BUILD_SOBOL)
   SET(SOBOL_SRC )
 ENDIF(BAYESOPT_BUILD_SOBOL)
 
+MESSAGE(STATUS CMAKE_SOURCE_DIR=${CMAKE_SOURCE_DIR})
+MESSAGE(STATUS CMAKE_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR})
 
 SET( BAYESOPT_SRCS
-  ./src/bayesoptcont.cpp
-  ./src/bayesoptdisc.cpp
-  ./src/bayesoptbase.cpp
-  ./src/posteriormodel.cpp
-  ./src/posterior_fixed.cpp
-  ./src/posterior_empirical.cpp
-  ./src/posterior_mcmc.cpp
-  ./src/mcmc_sampler.cpp
-  ./src/inneroptimization.cpp
-  ./src/dataset.cpp
-  ./src/nonparametricprocess.cpp
-  ./src/kernelregressor.cpp
-  ./src/conditionalbayesprocess.cpp
-  ./src/gaussian_process.cpp
-  ./src/gaussian_process_ml.cpp
-  ./src/gaussian_process_normal.cpp
-  ./src/gaussian_process_hierarchical.cpp
-  ./src/student_t_process_jef.cpp
-  ./src/student_t_process_nig.cpp
-  ./src/parameters.cpp
-  ./src/kernel_functors.cpp
-  ./src/criteria_functors.cpp
-  ./src/criteria_hedge.cpp
-  ./src/mean_functors.cpp
-  ./src/gauss_distribution.cpp
-  ./src/student_t_distribution.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/bayesoptcont.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/bayesoptdisc.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/bayesoptbase.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/posteriormodel.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/posterior_fixed.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/posterior_empirical.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/posterior_mcmc.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/mcmc_sampler.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/inneroptimization.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/dataset.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/nonparametricprocess.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/kernelregressor.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/conditionalbayesprocess.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/gaussian_process.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/gaussian_process_ml.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/gaussian_process_normal.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/gaussian_process_hierarchical.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/student_t_process_jef.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/student_t_process_nig.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/parameters.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/kernel_functors.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/criteria_functors.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/criteria_hedge.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/mean_functors.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/gauss_distribution.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/student_t_distribution.cpp
   )
 
 SET(UTILS_SRC
-  ./utils/parser.cpp
-  ./utils/ublas_extra.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/utils/parser.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/utils/ublas_extra.cpp
   ${SOBOL_SRC}
   )
 
 SET(WRAPPPERS_SRC 
-  ./wrappers/bayesoptwpr.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/wrappers/bayesoptwpr.cpp
   )
 
 
-INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR}/include 
-                     ${CMAKE_SOURCE_DIR}/wrappers
-		     ${CMAKE_SOURCE_DIR}/utils
-		     ${CMAKE_SOURCE_DIR}/sobol )
+INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR}/include
+                     ${CMAKE_CURRENT_SOURCE_DIR}/wrappers
+                     ${CMAKE_CURRENT_SOURCE_DIR}/utils
+                     ${CMAKE_CURRENT_SOURCE_DIR}/sobol )
 
 
-LINK_DIRECTORIES( ${CMAKE_SOURCE_DIR}/lib )
+LINK_DIRECTORIES( ${CMAKE_BINARY_DIR}/lib )
 
 IF(NLOPT_BUILD)
   ADD_SUBDIRECTORY(nlopt2)
@@ -175,8 +177,8 @@ IF(BAYESOPT_BUILD_EXAMPLES)
 endif(BAYESOPT_BUILD_EXAMPLES)
 
 INSTALL(FILES 
-  ./include/bayesopt.hpp 
-  ./wrappers/bayesopt.h 
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/bayesopt.hpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/wrappers/bayesopt.h
   DESTINATION include
 )
 
