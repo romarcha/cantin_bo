@@ -51,12 +51,12 @@ find_package(OpenGL)
 if(OPENGL_FOUND AND GLUT_FOUND)
 
   SET(DISPLAY_SRC     
-    ../utils/displaygp.cpp
-    ../matplotpp/matplotpp.cc 
-    ../matplotpp/gl2ps.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../utils/displaygp.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../matplotpp/matplotpp.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/../matplotpp/gl2ps.c
     )
 
-  INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/matplotpp
+  INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../matplotpp
 		      ${GLUT_INCLUDE_DIRS} 
 		      ${GLUT_INCLUDE_DIR} 
 		      ${OpenGL_INCLUDE_DIRS})			  
